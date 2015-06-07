@@ -1,0 +1,7 @@
+#!/bin/bash
+if [ $(echo $0 | grep '^/') ]; then
+    path=$(dirname $0)
+else
+    path=$(pwd)
+fi
+echo $path
