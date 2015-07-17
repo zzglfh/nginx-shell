@@ -14,5 +14,5 @@
 例如，添加反向代理 test.zzg.me  到 /var/www/test   （根据域名跳转）  
 
 ```
-./path_add test.zzg.me /var/www/test  
+./path_add test.zzg.me test  
 ```
