@@ -18,35 +18,21 @@
 ##
 
 server {
+        listen 80;
 
-	listen 80;
+        root TO_URL;
+        index index.html index.htm;
 
+        # Make site accessible from http://localhost/
+        server_name FROM_URL;
 
-	# Make site accessible from http://localhost/
-	server_name   FROM_URL;
-
-	# Only for nginx-naxsi used with nginx-naxsi-ui : process denied requests
-	location / {
-		
-		if ($request_method = OPTIONS ) {
-			add_header Access-Control-Allow-Origin "*";
-                	add_header Access-Control-Allow-Methods "POST, GET, PUT, OPTIONS, DELETE";
-                	add_header Access-Control-Max-Age "3600";
-               		add_header Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Accept, Authorization";
-                
-			#add_header Access-Control-Allow-Credentials "true";
-        		add_header Content-Length 0;
-			#add_header  Access-Control-Max-Age "3600";
-      			add_header Content-Type text/plain;
-    			return 200;
-   		 }
-                 proxy_set_header X-Real-IP $remote_addr;
-                 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                 proxy_set_header Host $http_host;
-                 proxy_set_header X-NginX-Proxy true;
-		   proxy_pass TO_URL;
-
-	}
+        location / {
+                # First attempt to serve request as file, then
+                # as directory, then fall back to displaying a 404.
+                try_files $uri $uri/ =404;
+                # Uncomment to enable naxsi on this location
+                # include /etc/nginx/naxsi.rules
+        }
 	
 	#error_page 404 /404.html;
 
