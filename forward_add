@@ -11,12 +11,13 @@ echo $path
 
 echo "$1 to $2"
 fromUrl="$1"
-toUrl="http:\\/\\/""$2"
+toUrl="http://""$2"
+
 echo "start...."
 cp -r $path/mould/mould-forward /etc/nginx/sites-available/$fromUrl
-echo "add formUrl :${fromUrl}"
-sed -i "s/FROM_URL/${fromUrl}/g"   /etc/nginx/sites-available/$fromUrl
-echo "add toutrl :${toUrl}"
-sed -i "s/TO_URL/${toUrl}/g"     /etc/nginx/sites-available/$fromUrl
+echo "add formUrl :${fromUrl//\//\\/}"
+sed -i "s/FROM_URL/${fromUrl//\//\\/}/g"   /etc/nginx/sites-available/$fromUrl
+echo "add toutrl :${toUrl//\//\\/}"
+sed -i "s/TO_URL/${toUrl//\//\\/}/g"     /etc/nginx/sites-available/$fromUrl
 ln -s /etc/nginx/sites-available/$fromUrl /etc/nginx/sites-enabled/$fromUrl
 service nginx reload

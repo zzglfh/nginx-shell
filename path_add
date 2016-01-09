@@ -13,14 +13,14 @@ echo $path
 
 echo "$1 to $2"
 fromUrl="$1"
-toUrl="\\/var\\/www\\/""$2"
-toPath="/var/www/""$2"
+toPath="$2"
 echo "start...."
-cp -r $path/mould/mould-ui /etc/nginx/sites-available/$fromUrl
+cp -r $path/mould/mould-path /etc/nginx/sites-available/$fromUrl
 echo "add formUrl :${fromUrl}"
 sed -i "s/FROM_URL/${fromUrl}/g"   /etc/nginx/sites-available/$fromUrl
-echo "add toutrl :${toUrl}"
-sed -i "s/TO_URL/${toUrl}/g"     /etc/nginx/sites-available/$fromUrl
-echo "mkdir ${toUrl}"
+echo "add toPath :${toPath//\//\\/}"
+sed -i "s/TO_PATH/${toPath//\//\\/}/g"     /etc/nginx/sites-available/$fromUrl
+echo "mkdir ${toPath}"
 mkdir -pv ${toPath}
 ln -s /etc/nginx/sites-available/$fromUrl /etc/nginx/sites-enabled/$fromUrl
+service nginx reload
