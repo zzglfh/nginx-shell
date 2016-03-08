@@ -7,7 +7,7 @@
 #添加一个反向代理
 例如，添加反向代理 test.zzg.me  到 127.0.0.1:8080/test   （根据域名跳转）  
 ```
-./forward_add test.zzg.me http://127.0.0.1:8080/test  
+./forward_add test.zzg.me 127.0.0.1:8080/test  
 ```
 
 #添加一个前端项目(html,php之类的，目录)  
