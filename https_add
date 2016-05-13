@@ -1,0 +1,23 @@
+#!/bin/bash -x
+#add a forward from a to b
+# use   ./addForward  a b
+
+if [ $(echo $0 | grep '^/') ]; then
+    path=$(dirname $0)
+else
+    path=$(pwd)
+fi
+echo $path
+
+echo "$1 to $2"
+fromUrl="$1"
+toUrl="http://""$2"
+
+echo "start...."
+cp -r $path/mould/mould-https /etc/nginx/sites-available/https_$fromUrl
+echo "add formUrl :${fromUrl//\//\\/}"
+sed -i "s/FROM_URL/${fromUrl//\//\\/}/g"   /etc/nginx/sites-available/https_$fromUrl
+echo "add toutrl :${toUrl//\//\\/}"
+sed -i "s/TO_URL/${toUrl//\//\\/}/g"     /etc/nginx/sites-available/https_$fromUrl
+ln -s /etc/nginx/sites-available/https_$fromUrl /etc/nginx/sites-enabled/https_$fromUrl
+service nginx reload
