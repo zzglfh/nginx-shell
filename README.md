@@ -16,3 +16,18 @@
 ```
 ./path_add test.zzg.me /var/www/test  
 ```
+
+# https
+
+```
+# https://test.zzg.me/.well-known/ forward to /usr/share/nginx/html
+# you can add ** location /.well-known/ { root /usr/share/nginx/html; }** to http://test.zzg.me/ nginx.conf file
+
+./https_add test.zzg.me
+``` 
+
+```
+crontab -e
+# add next line job
+16 5 * * * /root/nginx-shell/cert_check_update
+```

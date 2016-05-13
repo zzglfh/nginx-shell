@@ -14,6 +14,12 @@ fromUrl="$1"
 toUrl="http://""$2"
 
 echo "start...."
+
+echo "create cert start"
+$path/add_cert $fromUrl
+
+
+
 cp -r $path/mould/mould-https /etc/nginx/sites-available/https_$fromUrl
 echo "add formUrl :${fromUrl//\//\\/}"
 sed -i "s/FROM_URL/${fromUrl//\//\\/}/g"   /etc/nginx/sites-available/https_$fromUrl
