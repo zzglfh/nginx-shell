@@ -1,0 +1,9 @@
+#!/bin/bash
+if test -f /etc/letsencrypt/live/$1/cert.pem ;then
+ echo "creat cert"
+ echo "$1 cert have create already"
+else
+ echo "creat cert"
+ ./certbot/certbot-auto certonly --webroot  -w /usr/share/nginx/html -d $1
+ echo "$1 cert have create already"
+fi
